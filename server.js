@@ -7,9 +7,16 @@ const users=[
     {id:2,name:'Anoop'}
 ]
 
-app.get('/users',(req,res)=>{
-    res.json(users);
-    res.send(users);
+app.get('/users/:id',(req,res)=>{
+    let id=Number(req.params.id);
+
+    let user=users.find(u=> u.id === id)
+    if(!user){
+        res.json({
+            message:"user not exists"
+        })
+    }
+    res.json(user);
 })
 
 app.listen(3000,()=>{
