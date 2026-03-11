@@ -2,17 +2,14 @@ import express from 'express';
 
 const app=express();
 
+const users=[
+    {id:1,name:'Arun'},
+    {id:2,name:'Anoop'}
+]
 
-app.get('/isEven/:number',(req,res)=>{
-    const number=Number(req.params.number);
-
-    let isEven= number % 2 === 0;
-
-   
-    res.json({
-        number:number,
-        isEven:isEven
-    })
+app.get('/users',(req,res)=>{
+    res.json(users);
+    res.send(users);
 })
 
 app.listen(3000,()=>{
