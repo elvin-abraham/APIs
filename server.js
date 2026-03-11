@@ -1,16 +1,17 @@
 import express from 'express';
 
 const app=express();
-app.use(express.json());
 
-app.post('/multiply',(req,res)=>{
-    const num1=req.body.num1;
-    const num2=req.body.num2;
 
-    const result=num1*num2;
+app.get('/isEven/:number',(req,res)=>{
+    const number=Number(req.params.number);
 
+    let isEven= number % 2 === 0;
+
+   
     res.json({
-        result:result
+        number:number,
+        isEven:isEven
     })
 })
 
