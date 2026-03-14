@@ -2,10 +2,13 @@ import express from 'express';
 
 const app=express();
 
-app.get('/message',(req,res)=>{
-    res.json({
-        message:'Hello welcome'
-    })
+app.get('/sum',(req,res)=>{
+   let num1=Number(req.query.num1);
+   let num2=Number(req.query.num2);
+   let sum=num1+num2;
+   res.json({
+    sum:sum
+   })
 })
 
 
