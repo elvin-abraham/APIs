@@ -1,13 +1,14 @@
 import express from 'express';
 
 const app=express();
+app.use(express.json());
 
-app.get('/sum',(req,res)=>{
-   let num1=Number(req.query.num1);
-   let num2=Number(req.query.num2);
-   let sum=num1+num2;
+app.post('/multiply',(req,res)=>{
+   let num1=Number(req.body.num1);
+   let num2=Number(req.body.num2);
+   let result=num1*num2;
    res.json({
-    sum:sum
+    result:result
    })
 })
 
