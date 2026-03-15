@@ -2,9 +2,12 @@ import express from 'express';
 
 const app=express();
 
-app.get('/testapi',(req,res)=>{
+app.get('/elvin',(req,res)=>{
+    let name=req.query.name;
+    let age=Number(req.query.age);
+
     res.json({
-        message:"test api message"
+        message:`My name is ${name} and my age is ${age}`
     })
 })
 
