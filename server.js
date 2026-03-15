@@ -2,12 +2,13 @@ import express from 'express';
 
 const app=express();
 
-app.get('/elvin',(req,res)=>{
-    let name=req.query.name;
-    let age=Number(req.query.age);
+app.use(express.json());
 
+app.post('/Rejin',(req,res)=>{
+    let name=req.body.name;
+    let age=Number(req.body.age);
     res.json({
-        message:`My name is ${name} and my age is ${age}`
+        message:`Hello,my name is ${name} and my age is ${age}`
     })
 })
 
