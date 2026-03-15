@@ -2,14 +2,19 @@ import express from 'express';
 
 const app=express();
 
-app.use(express.json());
 
-app.post('/Rejin',(req,res)=>{
-    let name=req.body.name;
-    let age=Number(req.body.age);
-    res.json({
-        message:`Hello,my name is ${name} and my age is ${age}`
-    })
+app.get('/isodd/:number',(req,res)=>{
+    let number=Number(req.params.number);
+    let isOdd=undefined;
+    if(number%2===1){
+        res.json({
+            message:"This number is odd"
+        })
+    }else{
+        res.json({
+            message:'This number is even'
+        })
+    }
 })
 
 app.listen(3000,()=>{
