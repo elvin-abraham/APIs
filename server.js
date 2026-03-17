@@ -2,19 +2,13 @@ import express from 'express';
 
 const app=express();
 
+   const users=[
+        {id:1,name:"Elvin"},
+        {id:2,name:"Jithin"}
+    ]
 
-app.get('/isodd/:number',(req,res)=>{
-    let number=Number(req.params.number);
-    let isOdd=undefined;
-    if(number%2===1){
-        res.json({
-            message:"This number is odd"
-        })
-    }else{
-        res.json({
-            message:'This number is even'
-        })
-    }
+app.get('/users',(req,res)=>{
+    res.json(users);
 })
 
 app.listen(3000,()=>{
