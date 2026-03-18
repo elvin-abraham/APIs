@@ -41,6 +41,21 @@ app.post('/students',async (req,res)=>{
   }
 })
 
+app.get('/students', async (req,res)=>{
+    try {
+        const allStudents=await Student.find()
+        res.json({
+            message:"All students details retrived",
+            Details:allStudents
+        })
+    } catch (error) {
+        res.status(500).json({
+            message:"Error while retrieving students data",
+            error:error.message
+        })
+    }
+})
+
 app.listen(3000,()=>{
     console.log('app is running');
 })
