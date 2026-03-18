@@ -56,6 +56,22 @@ app.get('/students', async (req,res)=>{
     }
 })
 
+app.get('/student/:id', async (req,res)=>{
+   try {
+     const id=req.params.id;
+    const searchingStudent= await Student.findById(id)
+    res.json({
+        message:"Found the student",
+        Details:searchingStudent
+    })
+   } catch (error) {
+     res.status(500).json({
+        message:"Could'nt find the student",
+        error:error.message
+     })
+   }
+})
+
 app.listen(3000,()=>{
     console.log('app is running');
 })
