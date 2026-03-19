@@ -18,6 +18,8 @@ const carSchema=mongoose.Schema({
 
 const Cars=mongoose.model("Cars",carSchema);
 
+//API to enter a new car into MongoDB
+
 app.post('/insertcar', async (req,res)=>{
     try {
         const {Car,Brand,ProductionYear}=req.body;
@@ -33,6 +35,23 @@ app.post('/insertcar', async (req,res)=>{
     } catch (error) {
         res.status(500).json({
             message:error.message
+        })
+    }
+})
+
+//API to access all cars details
+
+app.get('/allcars',async (req,res)=>{
+    try {
+        const allCars=await Cars.find();
+        res.status(200).json({
+            message:"All details accessed",
+            AllCars:allCars
+        })
+    } catch (error) {
+        res.status(500).json({
+            message:"Could'nt access details",
+            error:error.message
         })
     }
 })
