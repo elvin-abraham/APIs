@@ -56,6 +56,24 @@ app.get('/allcars',async (req,res)=>{
     }
 })
 
+//API to access a specific car details via id
+
+app.get('/searchedcar/:id',async (req,res)=>{
+    try {
+        const id = req.params.id;
+        const searchedCar=await Cars.findById(id);
+        res.status(200).json({
+            message:"Found the searched car",
+            searchedcar:searchedCar
+        })
+    } catch (error) {
+        res.status(500).json({
+            message:"Could'nt find the searched car",
+            error:error.message
+        })
+    }
+})
+
 app.listen(3000,()=>{
     console.log("app is running");
 })
