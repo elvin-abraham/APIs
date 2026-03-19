@@ -1,77 +1,42 @@
-import express from 'express';
-import mongoose from 'mongoose';
+import express from 'express'
+import mongoose from 'mongoose'
 
 const app=express();
 app.use(express.json());
 
-mongoose.connect("mongodb://127.0.0.1:27017/schoolDB")
-.then(()=>{
-    console.log("Mongodb connected")
+mongoose.connect("mongodb://127.0.0.1:27017/CarsDb").then(()=>{
+    console.log("Mongodb connected");
 }).catch((err)=>{
     console.log(err)
 })
 
-const studentSchema=new mongoose.Schema({
-    name:String,
-    age:Number,
-    course:String
+const carSchema=mongoose.Schema({
+    Car:String,
+    Brand:String,
+    ProductionYear:Number
 })
 
-const Student=mongoose.model("Student",studentSchema)
+const Cars=mongoose.model("Cars",carSchema);
 
-app.post('/students',async (req,res)=>{
-  try {
-       const {name,age,course}=req.body;
-     const newStudent=new Student({
-        name,
-        age,
-        course
-     })
-
-     await newStudent.save();
-     res.json({
-        message:"Student Added",
-        Details:newStudent
-     })
-  } catch (error) {
-    res.status(500).json({
-        message:"Error while adding student",
-        error:error.message
-    })
-  }
-})
-
-app.get('/students', async (req,res)=>{
+app.post('/insertcar', async (req,res)=>{
     try {
-        const allStudents=await Student.find()
-        res.json({
-            message:"All students details retrived",
-            Details:allStudents
+        const {Car,Brand,ProductionYear}=req.body;
+        const newCar = new Cars({
+            Car,
+            Brand,
+            ProductionYear
         })
+       await  newCar.save();
+       res.status(200).json({
+        message:"New car entered"
+       })
     } catch (error) {
         res.status(500).json({
-            message:"Error while retrieving students data",
-            error:error.message
+            message:error.message
         })
     }
 })
 
-app.get('/student/:id', async (req,res)=>{
-   try {
-     const id=req.params.id;
-    const searchingStudent= await Student.findById(id)
-    res.json({
-        message:"Found the student",
-        Details:searchingStudent
-    })
-   } catch (error) {
-     res.status(500).json({
-        message:"Could'nt find the student",
-        error:error.message
-     })
-   }
-})
-
 app.listen(3000,()=>{
-    console.log('app is running');
+    console.log("app is running");
 })
